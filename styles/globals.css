@@ -27,3 +27,39 @@ a {
   font-weight: normal;
   src: url('/fonts/JeanSunHo.woff');
 }
+
+.react-select-dark__control {
+  background-color: #303030 !important;
+}
+
+.react-select-dark__menu {
+  background-color: #303030 !important;
+}
+
+.react-select-dark__multi-value {
+  background-color: #404040 !important;
+}
+
+.react-select-dark__multi-value__label {
+  color: #fff !important;
+}
+
+.react-select-dark__multi-value__remove {
+  color: #000;
+}
+
+.react-select-dark__option {
+  background-color: #303030 !important;
+}
+
+.react-select-dark__option:hover {
+  background-color: #404040 !important;
+}
+
+.react-select-dark__option:focus {
+  background-color: #404040 !important;
+}
+
+.react-select-dark__option:active {
+  background-color: #404040 !important;
+}

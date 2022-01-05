@@ -92,3 +92,37 @@
   -webkit-animation: move-clouds-back 200s linear infinite;
   animation: move-clouds-back 200s linear infinite;
 }
+
+/* Config form */
+
+.configForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.configFormDark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.select {
+  min-width: 600px;
+  margin-right: 10px;
+}
+
+.categoriesCheckbox {
+  margin-right: 10px;
+}
+
+.configForm input[type='checkbox'] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+
+.configFormDark input[type='checkbox'] {
+  transform: scale(1.5);
+  margin-right: 10px;
+}

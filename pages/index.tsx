@@ -7,6 +7,7 @@ import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
 
   return (
     <div className={darkMode ? styles.containerDark : styles.container}>
@@ -26,6 +27,8 @@ const Home: NextPage = () => {
         <MainBox
           darkMode={darkMode}
           onDarkModeChange={() => setDarkMode(!darkMode)}
+          onShowCategoriesChange={() => setShowCategories(!showCategories)}
+          showCategories={showCategories}
         />
 
         <div className={styles.grid}>
@@ -92,3 +95,14 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  // const { data } = await axios.get('https://xkcd.com/')
+  // const $ = cheerio.load(data)
+  // const title = $('#ctitle').text()
+  const lastScraped = new Date().toISOString();
+  return {
+    props: { title: 'test', lastScraped },
+    revalidate: 10,
+  };
+}
