@@ -7,13 +7,15 @@ type Props = {
   darkMode: boolean;
   onDarkModeChange: () => void;
   onShowCategoriesChange: () => void;
+  onCategoriesFilter: (values: string[]) => void;
   showCategories: boolean;
 };
 
 function ConfigForm(props: Props) {
   const options = [
     { value: 'jokes', label: 'Jokes' },
-    { value: 'youtube', label: 'Youtube' },
+    { value: 'movies', label: 'Movies' },
+    { value: 'fun', label: 'Fun' },
   ];
 
   return (
@@ -27,6 +29,9 @@ function ConfigForm(props: Props) {
             props.darkMode ? 'react-select-dark' : 'react-select'
           }
           placeholder="Filter by categories"
+          onChange={(options) =>
+            props.onCategoriesFilter(options.map((o) => o.value))
+          }
         />
       </div>
 

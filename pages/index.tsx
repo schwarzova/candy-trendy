@@ -1,13 +1,25 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
 import MainBox from '../components/MainBox/MainBox';
 import styles from '../styles/Home.module.css';
+import cheerio from 'cheerio';
+import axios, { Method } from 'axios';
+import TrendList from '../components/TrendList/TrendList';
+import { Movie } from '../components/TrendList/MovieCard';
+import { useAppContext } from '../context/state';
 
-const Home: NextPage = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [showCategories, setShowCategories] = useState(false);
+type Props = {
+  lastScraped: string;
+  jokes: string[];
+  movies: Movie[];
+};
+
+const Home = (props: Props) => {
+  const { darkMode } = useAppContext();
+
+  const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
 
   return (
     <div className={darkMode ? styles.containerDark : styles.container}>
@@ -24,58 +36,13 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <MainBox
-          darkMode={darkMode}
-          onDarkModeChange={() => setDarkMode(!darkMode)}
-          onShowCategoriesChange={() => setShowCategories(!showCategories)}
-          showCategories={showCategories}
+        <p>Last scraped: {props.lastScraped}</p>
+        <MainBox onCategoriesFilter={setFilteredCategories} />
+        <TrendList
+          filteredCategories={filteredCategories}
+          jokes={props.jokes}
+          movies={props.movies}
         />
-
-        <div className={styles.grid}>
-          <div className={styles.loader}>
-            <Image
-              src="/images/pepeLoader.gif"
-              alt="Loader"
-              width={70}
-              height={70}
-            />
-          </div>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -96,13 +63,39 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export async function getStaticProps() {
-  // const { data } = await axios.get('https://xkcd.com/')
-  // const $ = cheerio.load(data)
-  // const title = $('#ctitle').text()
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { data } = await axios.get(
+    'http://www.laughfactory.com/jokes/latest-jokes'
+  );
+  let $ = cheerio.load(data);
+  const jokes = $('.joke-text p')
+    .toArray()
+    .map((x) => $(x).text());
+
+  const { data: tata } = await axios.get(
+    'https://editorial.rottentomatoes.com/guide/popular-movies/'
+  );
+  $ = cheerio.load(tata);
+  const moviesImg = $('.article_poster')
+    .toArray()
+    .map((x) => $(x).attr('src'));
+  const moviesTitle = $('.article_movie_title a')
+    .toArray()
+    .map((x) => $(x).text());
+  const moviesPercentage = $('.tMeterScore')
+    .toArray()
+    .map((x) => $(x).text());
+
+  const movies = moviesImg.map((img, i) => ({
+    img,
+    title: moviesTitle[i],
+    percentage: moviesPercentage[i],
+    rank: i,
+  }));
+
   const lastScraped = new Date().toISOString();
   return {
-    props: { title: 'test', lastScraped },
-    revalidate: 10,
+    props: { jokes, lastScraped, movies },
+    revalidate: 3600, // rerun after 1 hour
   };
-}
+};

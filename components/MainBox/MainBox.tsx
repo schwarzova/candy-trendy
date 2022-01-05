@@ -1,44 +1,46 @@
 import React, { useState } from 'react';
+import { useAppContext } from '../../context/state';
 import ConfigForm from './ConfigForm';
 
 import styles from './MainBox.module.css';
 import Title from './Title';
 
 type Props = {
-  darkMode: boolean;
-  onDarkModeChange: () => void;
-  onShowCategoriesChange: () => void;
-  showCategories: boolean;
+  onCategoriesFilter: (values: string[]) => void;
 };
 
 function MainBox(props: Props) {
+  const { darkMode, showCategories, onDarkModeToggle, onShowCategoriesToggle } =
+    useAppContext();
+
   const [leftLampOn, setLeftLampOn] = useState(false);
   const [rightLampOn, setRightLampOn] = useState(false);
 
   function handleDarkModeChange() {
-    props.onDarkModeChange();
+    onDarkModeToggle();
 
-    if (!props.darkMode) {
-      setTimeout(() => setLeftLampOn(!props.darkMode), 400);
-      setTimeout(() => setRightLampOn(!props.darkMode), 800);
+    if (!darkMode) {
+      setTimeout(() => setLeftLampOn(!darkMode), 400);
+      setTimeout(() => setRightLampOn(!darkMode), 800);
     } else {
-      setTimeout(() => setRightLampOn(!props.darkMode), 200);
-      setTimeout(() => setLeftLampOn(!props.darkMode), 600);
+      setTimeout(() => setRightLampOn(!darkMode), 200);
+      setTimeout(() => setLeftLampOn(!darkMode), 600);
     }
   }
 
   return (
     <div className={styles.mainBox}>
       <Title
-        darkMode={props.darkMode}
+        darkMode={darkMode}
         isLeftLampOn={leftLampOn}
         isRightLampOn={rightLampOn}
       />
       <ConfigForm
-        darkMode={props.darkMode}
+        darkMode={darkMode}
+        onCategoriesFilter={props.onCategoriesFilter}
         onDarkModeChange={handleDarkModeChange}
-        onShowCategoriesChange={props.onShowCategoriesChange}
-        showCategories={props.showCategories}
+        onShowCategoriesChange={onShowCategoriesToggle}
+        showCategories={showCategories}
       />
     </div>
   );
