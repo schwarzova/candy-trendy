@@ -106,20 +106,13 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
-  // const { data: gamesData } = await axios.get(
-  //   'https://www.twitchmetrics.net/games/viewership',
-  //   axiosOptions
-  // );
   let gamesData;
 
   try {
     gamesData = await axios.get(
       'https://www.twitchmetrics.net/games/viewership'
     );
-    console.log('gamesData', gamesData);
-  } catch (error) {
-    console.error('error', error);
-  }
+  } catch (error) {}
 
   $ = cheerio.load(gamesData?.data);
   const games = $('.media')

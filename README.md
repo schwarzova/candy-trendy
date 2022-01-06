@@ -25,7 +25,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Pages used for scraping
 
-- [Games](https://twitchtracker.com/games) - 20 Twitch trending games
+- [Games](https://www.twitchmetrics.net/games/viewership) - 20 Twitch trending games
 - [Jokes](http://www.laughfactory.com/jokes/latest-jokes) - 12 Latest jokes
 - [Movies](https://editorial.rottentomatoes.com/guide/popular-movies/) - 30 latest popular movies
+- [Netflix Movies](https://flixpatrol.com/top10/netflix/) - 10 top movies + 10 top shows
 - [Music](https://www.aria.com.au/charts/singles-chart) - 50 top songs

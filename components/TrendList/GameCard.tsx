@@ -24,7 +24,7 @@ function GameCard(props: Props) {
 
   return (
     <a
-      href="https://twitchtracker.com/games"
+      href="https://www.twitchmetrics.net/games/viewership"
       className={styles.card}
       target="_blank"
       rel="noreferrer"
@@ -42,14 +42,14 @@ function GameCard(props: Props) {
         {props.games.map((m, i) => (
           <div
             key={i}
-            style={{ display: 'flex', marginTop: '10px', position: 'relative' }}
+            style={{ display: 'flex', marginTop: '30px', position: 'relative' }}
           >
             <img
               src={m.img}
-              width={80}
-              height={100}
+              width={60}
+              height={80}
               alt={m.title}
-              style={{ marginRight: '10px' }}
+              style={{ marginRight: '10px', borderRadius: '10px' }}
             />
             <div>
               <p>
@@ -76,11 +76,11 @@ function GameCard(props: Props) {
       {showCategories && <div className={styles.categories}>#games #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
         <a
-          href="https://twitchtracker.com/games"
+          href="https://www.twitchmetrics.net/games/viewership"
           target="_blank"
           rel="noreferrer"
         >
-          https://twitchtracker.com/games
+          https://www.twitchmetrics.net/games/viewership
         </a>
       </div>
     </a>
