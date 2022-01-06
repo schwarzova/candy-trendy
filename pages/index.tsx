@@ -10,12 +10,14 @@ import TrendList from '../components/TrendList/TrendList';
 import { Movie } from '../components/TrendList/MovieCard';
 import { useAppContext } from '../context/state';
 import { Game } from '../components/TrendList/GameCard';
+import { Song } from '../components/TrendList/MusicCard';
 
 type Props = {
   lastScraped: string;
   jokes: string[];
   movies: Movie[];
   games: Game[];
+  songs: Song[];
 };
 
 const Home = (props: Props) => {
@@ -48,6 +50,7 @@ const Home = (props: Props) => {
           games={props.games}
           jokes={props.jokes}
           movies={props.movies}
+          songs={props.songs}
         />
       </main>
 
@@ -104,9 +107,23 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
+  const { data: musicData } = await axios.get(
+    'https://www.aria.com.au/charts/singles-chart'
+  );
+  console.log('musicData', musicData);
+  $ = cheerio.load(musicData);
+  const songs = $('.c-chart-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('img').attr('data-src'),
+      title: $(x).find('.c-chart-item__title').text(),
+      artist: $(x).find('.c-chart-item__artist').text(),
+      rank: i + 1,
+    }));
+
   const lastScraped = new Date().toISOString();
   return {
-    props: { jokes, lastScraped, movies, games },
+    props: { jokes, lastScraped, movies, games, songs },
     revalidate: 3600, // rerun after 1 hour
   };
 };
