@@ -108,6 +108,10 @@
   color: #fff;
 }
 
+.inputs {
+  display: flex;
+}
+
 .select {
   min-width: 600px;
   margin-right: 10px;
@@ -125,4 +129,82 @@
 .configFormDark input[type='checkbox'] {
   transform: scale(1.5);
   margin-right: 10px;
+}
+
+@media (max-width: 968px) {
+  .configForm {
+    flex-direction: column;
+  }
+
+  .configFormDark {
+    flex-direction: column;
+  }
+
+  .select {
+    margin-right: 0px;
+  }
+
+  .inputs {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 792px) {
+  .title {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 670px) {
+  .title {
+    font-size: 4rem;
+  }
+
+  .mainTitle {
+    align-items: center;
+  }
+
+  .select {
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 546px) {
+  .leftLamp {
+    margin-left: -25px;
+  }
+
+  .rightLamp {
+    margin-right: -25px;
+  }
+}
+
+@media (max-width: 496px) {
+  .title {
+    text-align: center;
+  }
+
+  .leftLamp {
+    margin-left: 0px;
+  }
+
+  .rightLamp {
+    margin-right: 0px;
+  }
+
+  .select {
+    min-width: 320px;
+  }
+}
+
+@media (max-width: 380px) {
+  .select {
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 380px) {
+  .select {
+    min-width: 100%;
+  }
 }

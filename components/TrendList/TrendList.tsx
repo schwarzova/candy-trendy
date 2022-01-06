@@ -6,18 +6,21 @@ import JokeCard from './JokeCard';
 import MovieCard, { Movie } from './MovieCard';
 import GameCard, { Game } from './GameCard';
 import MusicCard, { Song } from './MusicCard';
+import NetflixCard, { NetflixMovie } from './NetflixCard';
 
 type Props = {
   filteredCategories: string[];
   games: Game[]; // 20
   jokes: string[]; //12
   movies: Movie[]; //30
+  netflixMovies: NetflixMovie[]; // 0 - 9 movies // 10 - 19 shows;
   songs: Song[]; //50
 };
 
 function TrendList(props: Props) {
   let jokes: string[] = [];
   let movies: Movie[] = [];
+  let netflixMovies: NetflixMovie[] = [];
   let games: Game[] = [];
   let songs: Song[] = [];
 
@@ -31,6 +34,7 @@ function TrendList(props: Props) {
 
   jokes = showAll || showJokes ? props.jokes : [];
   movies = showAll || showMovies ? props.movies : [];
+  netflixMovies = showAll || showMovies ? props.netflixMovies : [];
   games = showAll || showGames ? props.games : [];
   songs = showAll || showSongs ? props.songs : [];
 
@@ -41,6 +45,10 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[0] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[0], movies[1]] : []} />
+      <NetflixCard
+        isShow
+        movie={netflixMovies.length > 0 ? netflixMovies[10] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[0], games[1]] : []} />
 
       <MusicCard
@@ -48,6 +56,10 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[1] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[2], movies[3]] : []} />
+      <NetflixCard
+        isShow
+        movie={netflixMovies.length > 0 ? netflixMovies[11] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[2], games[3]] : []} />
 
       <MusicCard
@@ -55,6 +67,10 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[2] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[4], movies[5]] : []} />
+      <NetflixCard
+        isShow
+        movie={netflixMovies.length > 0 ? netflixMovies[12] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[4], games[5]] : []} />
 
       <MusicCard
@@ -62,6 +78,9 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[3] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[6], movies[7]] : []} />
+      <NetflixCard
+        movie={netflixMovies.length > 0 ? netflixMovies[0] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[6], games[7]] : []} />
 
       <MusicCard
@@ -69,6 +88,9 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[4] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[8], movies[9]] : []} />
+      <NetflixCard
+        movie={netflixMovies.length > 0 ? netflixMovies[1] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[8], games[9]] : []} />
 
       <MusicCard
@@ -76,6 +98,9 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[5] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[10], movies[11]] : []} />
+      <NetflixCard
+        movie={netflixMovies.length > 0 ? netflixMovies[2] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[10], games[11]] : []} />
 
       <MusicCard
@@ -83,6 +108,10 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[6] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[12], movies[13]] : []} />
+      <NetflixCard
+        isShow
+        movie={netflixMovies.length > 0 ? netflixMovies[13] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[12], games[13]] : []} />
 
       <MusicCard
@@ -90,6 +119,10 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[7] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[14], movies[15]] : []} />
+      <NetflixCard
+        isShow
+        movie={netflixMovies.length > 0 ? netflixMovies[14] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[14], games[15]] : []} />
 
       <MusicCard
@@ -97,6 +130,10 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[8] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[16], movies[17]] : []} />
+      <NetflixCard
+        isShow
+        movie={netflixMovies.length > 0 ? netflixMovies[15] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[16], games[17]] : []} />
 
       <MusicCard
@@ -104,6 +141,9 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[9] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[18], movies[19]] : []} />
+      <NetflixCard
+        movie={netflixMovies.length > 0 ? netflixMovies[3] : undefined}
+      />
       <GameCard games={games.length > 0 ? [games[18], games[19]] : []} />
 
       <MusicCard
@@ -111,12 +151,18 @@ function TrendList(props: Props) {
       />
       <JokeCard joke={jokes[10] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[20], movies[21]] : []} />
+      <NetflixCard
+        movie={netflixMovies.length > 0 ? netflixMovies[4] : undefined}
+      />
 
       <MusicCard
         songs={songs.length > 0 ? [songs[33], songs[34], songs[35]] : []}
       />
       <JokeCard joke={jokes[11] || ''} />
       <MovieCard movies={movies.length > 0 ? [movies[22], movies[23]] : []} />
+      <NetflixCard
+        movie={netflixMovies.length > 0 ? netflixMovies[5] : undefined}
+      />
     </div>
   );
 }

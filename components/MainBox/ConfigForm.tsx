@@ -37,25 +37,27 @@ function ConfigForm(props: Props) {
         />
       </div>
 
-      <input
-        type="checkbox"
-        id="categories"
-        name="categories"
-        checked={props.showCategories}
-        onChange={props.onShowCategoriesChange}
-      />
-      <label className={styles.categoriesCheckbox} htmlFor="categories">
-        Show categories
-      </label>
+      <div className={styles.inputs}>
+        <input
+          type="checkbox"
+          id="categories"
+          name="categories"
+          checked={props.showCategories}
+          onChange={props.onShowCategoriesChange}
+        />
+        <label className={styles.categoriesCheckbox} htmlFor="categories">
+          Show categories
+        </label>
 
-      <input
-        type="checkbox"
-        id="darkMode"
-        name="darkMode"
-        checked={props.darkMode}
-        onChange={props.onDarkModeChange}
-      />
-      <label htmlFor="darkMode">Dark mode</label>
+        <input
+          type="checkbox"
+          id="darkMode"
+          name="darkMode"
+          checked={props.darkMode}
+          onChange={props.onDarkModeChange}
+        />
+        <label htmlFor="darkMode">Dark mode</label>
+      </div>
     </div>
   );
 }

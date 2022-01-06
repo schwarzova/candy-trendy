@@ -95,3 +95,11 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 350px) {
+  .card {
+    margin: 10px 10px 0 10px;
+    max-width: 280px;
+    min-width: 280px;
+  }
+}

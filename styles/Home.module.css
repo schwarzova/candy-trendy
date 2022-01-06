@@ -40,3 +40,13 @@
   height: 1em;
   margin-left: 0.5rem;
 }
+
+@media (max-width: 425px) {
+  .container {
+    margin: 10px;
+  }
+
+  .containerDark {
+    margin: 10px;
+  }
+}

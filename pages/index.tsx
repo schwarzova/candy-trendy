@@ -11,11 +11,13 @@ import { Movie } from '../components/TrendList/MovieCard';
 import { useAppContext } from '../context/state';
 import { Game } from '../components/TrendList/GameCard';
 import { Song } from '../components/TrendList/MusicCard';
+import { NetflixMovie } from '../components/TrendList/NetflixCard';
 
 type Props = {
   lastScraped: string;
   jokes: string[];
   movies: Movie[];
+  netflixMovies: NetflixMovie[];
   games: Game[];
   songs: Song[];
 };
@@ -50,6 +52,7 @@ const Home = (props: Props) => {
           games={props.games}
           jokes={props.jokes}
           movies={props.movies}
+          netflixMovies={props.netflixMovies}
           songs={props.songs}
         />
       </main>
@@ -110,7 +113,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data: musicData } = await axios.get(
     'https://www.aria.com.au/charts/singles-chart'
   );
-  console.log('musicData', musicData);
   $ = cheerio.load(musicData);
   const songs = $('.c-chart-item')
     .toArray()
@@ -121,9 +123,28 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
+  const { data: netflixData } = await axios.get(
+    'https://flixpatrol.com/top10/netflix/'
+  );
+  $ = cheerio.load(netflixData);
+  const netMovies = $('.table-group').toArray().slice(0, 20);
+  const netflixMovies = netMovies.map((x, i) => ({
+    img:
+      'https://flixpatrol.com' + $(x).find('.table-poster-1 img').attr('src'),
+    title: $(x).find('a').text(),
+    rank: i + 1,
+  }));
+
   const lastScraped = new Date().toISOString();
   return {
-    props: { jokes, lastScraped, movies, games, songs },
+    props: {
+      jokes,
+      lastScraped,
+      movies,
+      games,
+      songs,
+      netflixMovies,
+    },
     revalidate: 3600, // rerun after 1 hour
   };
 };

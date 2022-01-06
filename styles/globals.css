@@ -28,6 +28,10 @@ a {
   src: url('/fonts/JeanSunHo.woff');
 }
 
+.react-select-dark__input {
+  color: #fff !important;
+}
+
 .react-select-dark__control {
   background-color: #303030 !important;
 }
