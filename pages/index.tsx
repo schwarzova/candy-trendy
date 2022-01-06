@@ -109,26 +109,8 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
-  const { data: gamesData } = await axios.get(
-    'https://twitchtracker.com/games',
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: 'application/json',
-      },
-    }
-  );
-  $ = cheerio.load(gamesData);
-  const games = $('.ranked-item')
-    .toArray()
-    .map((x, i) => ({
-      img: $(x).find('.ri-image img').attr('src'),
-      title: $(x).find('.ri-name a').text(),
-      rank: i + 1,
-    }));
-
-  // const { data: musicData } = await axios.get(
-  //   'https://www.aria.com.au/charts/singles-chart',
+  // const { data: gamesData } = await axios.get(
+  //   'https://twitchtracker.com/games',
   //   {
   //     headers: {
   //       'Content-Type': 'application/x-www-form-urlencoded',
@@ -136,15 +118,33 @@ export const getStaticProps: GetStaticProps = async () => {
   //     },
   //   }
   // );
-  // $ = cheerio.load(musicData);
-  // const songs = $('.c-chart-item')
+  // $ = cheerio.load(gamesData);
+  // const games = $('.ranked-item')
   //   .toArray()
   //   .map((x, i) => ({
-  //     img: $(x).find('img').attr('data-src'),
-  //     title: $(x).find('.c-chart-item__title').text(),
-  //     artist: $(x).find('.c-chart-item__artist').text(),
+  //     img: $(x).find('.ri-image img').attr('src'),
+  //     title: $(x).find('.ri-name a').text(),
   //     rank: i + 1,
   //   }));
+
+  const { data: musicData } = await axios.get(
+    'https://www.aria.com.au/charts/singles-chart',
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+      },
+    }
+  );
+  $ = cheerio.load(musicData);
+  const songs = $('.c-chart-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('img').attr('data-src'),
+      title: $(x).find('.c-chart-item__title').text(),
+      artist: $(x).find('.c-chart-item__artist').text(),
+      rank: i + 1,
+    }));
 
   // const { data: netflixData } = await axios.get(
   //   'https://flixpatrol.com/top10/netflix/',
@@ -169,8 +169,8 @@ export const getStaticProps: GetStaticProps = async () => {
       jokes,
       lastScraped,
       movies,
-      games,
-      songs: [],
+      games: [],
+      songs,
       netflixMovies: [],
     },
     revalidate: 3600, // rerun after 1 hour
