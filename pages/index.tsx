@@ -146,22 +146,23 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
-  // const { data: netflixData } = await axios.get(
-  //   'https://flixpatrol.com/top10/netflix/',
-  //   {
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       Accept: 'application/json',
-  //     },
-  //   }
-  // );
-  // $ = cheerio.load(netflixData);
-  // const netMovies = $('.table-group').toArray().slice(0, 20);
-  // const netflixMovies = netMovies.map((x, i) => ({
-  //   img: 'https://flixpatrol.com' + $(x).find('.table-poster-1 img').attr('src'),
-  //   title: $(x).find('a').text(),
-  //   rank: i + 1,
-  // }));
+  const { data: netflixData } = await axios.get(
+    'https://flixpatrol.com/top10/netflix/',
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+      },
+    }
+  );
+  $ = cheerio.load(netflixData);
+  const netMovies = $('.table-group').toArray().slice(0, 20);
+  const netflixMovies = netMovies.map((x, i) => ({
+    img:
+      'https://flixpatrol.com' + $(x).find('.table-poster-1 img').attr('src'),
+    title: $(x).find('a').text(),
+    rank: i + 1,
+  }));
 
   const lastScraped = new Date().toISOString();
   return {
@@ -171,7 +172,7 @@ export const getStaticProps: GetStaticProps = async () => {
       movies,
       games: [],
       songs,
-      netflixMovies: [],
+      netflixMovies,
     },
     revalidate: 3600, // rerun after 1 hour
   };
