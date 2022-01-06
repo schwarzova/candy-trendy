@@ -169,9 +169,9 @@ export const getStaticProps: GetStaticProps = async () => {
       jokes,
       lastScraped,
       movies,
-      games,
-      songs,
-      netflixMovies,
+      games: [],
+      songs: [],
+      netflixMovies: [],
     },
     revalidate: 3600, // rerun after 1 hour
   };
