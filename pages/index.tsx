@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps = async () => {
     .map((x) => $(x).text());
 
   const { data: moviesData } = await axios.get(
-    'https://editorial.rottentomatoes.com/guide/popular-movies/',
+    'http://editorial.rottentomatoes.com/guide/popular-movies/',
     {
       headers: {
         Accept: 'application/json',
@@ -100,7 +100,6 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   );
   $ = cheerio.load(moviesData);
-
   const movies = $('.countdown-item')
     .toArray()
     .map((x, i) => ({
@@ -111,7 +110,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: gamesData } = await axios.get(
-    'https://twitchtracker.com/games',
+    'http://twitchtracker.com/games',
     {
       headers: {
         Accept: 'application/json',
@@ -129,7 +128,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: musicData } = await axios.get(
-    'https://www.aria.com.au/charts/singles-chart',
+    'http://www.aria.com.au/charts/singles-chart',
     {
       headers: {
         Accept: 'application/json',
@@ -148,7 +147,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: netflixData } = await axios.get(
-    'https://flixpatrol.com/top10/netflix/',
+    'http://flixpatrol.com/top10/netflix/',
     {
       headers: {
         Accept: 'application/json',
@@ -159,8 +158,7 @@ export const getStaticProps: GetStaticProps = async () => {
   $ = cheerio.load(netflixData);
   const netMovies = $('.table-group').toArray().slice(0, 20);
   const netflixMovies = netMovies.map((x, i) => ({
-    img:
-      'https://flixpatrol.com' + $(x).find('.table-poster-1 img').attr('src'),
+    img: 'http://flixpatrol.com' + $(x).find('.table-poster-1 img').attr('src'),
     title: $(x).find('a').text(),
     rank: i + 1,
   }));
