@@ -106,11 +106,19 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
-  const { data: gamesData } = await axios.get(
-    'http://twitchtracker.com/games',
-    axiosOptions
-  );
-  $ = cheerio.load(gamesData);
+  // const { data: gamesData } = await axios.get(
+  //   'http://twitchtracker.com/games',
+  //   axiosOptions
+  // );
+  let gamesData;
+  try {
+    gamesData = await axios.get('http://twitchtracker.com/games');
+    console.log('gamesData', gamesData);
+  } catch (error) {
+    console.error('error', error);
+  }
+
+  $ = cheerio.load(gamesData?.data);
   const games = $('.ranked-item')
     .toArray()
     .map((x, i) => ({
