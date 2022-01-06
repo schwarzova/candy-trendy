@@ -112,7 +112,9 @@ export const getStaticProps: GetStaticProps = async () => {
   // );
   let gamesData;
   try {
-    gamesData = await axios.get('http://twitchtracker.com/games');
+    gamesData = await axios.get(
+      'https://www.twitchmetrics.net/games/viewership'
+    );
     console.log('gamesData', gamesData);
   } catch (error) {
     console.error('error', error);
