@@ -5,7 +5,7 @@ import { useState } from 'react';
 import MainBox from '../components/MainBox/MainBox';
 import styles from '../styles/Home.module.css';
 import cheerio from 'cheerio';
-import axios, { Method } from 'axios';
+import axios from 'axios';
 import TrendList from '../components/TrendList/TrendList';
 import { Movie } from '../components/TrendList/MovieCard';
 import { useAppContext } from '../context/state';
@@ -77,7 +77,13 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data: jokesData } = await axios.get(
-    'http://www.laughfactory.com/jokes/latest-jokes'
+    'http://www.laughfactory.com/jokes/latest-jokes',
+    {
+      headers: {
+        Accept: 'application/json',
+        'User-Agent': 'axios 0.21.1',
+      },
+    }
   );
   let $ = cheerio.load(jokesData);
   const jokes = $('.joke-text p')
@@ -85,7 +91,13 @@ export const getStaticProps: GetStaticProps = async () => {
     .map((x) => $(x).text());
 
   const { data: moviesData } = await axios.get(
-    'https://editorial.rottentomatoes.com/guide/popular-movies/'
+    'https://editorial.rottentomatoes.com/guide/popular-movies/',
+    {
+      headers: {
+        Accept: 'application/json',
+        'User-Agent': 'axios 0.21.1',
+      },
+    }
   );
   $ = cheerio.load(moviesData);
 
@@ -99,7 +111,13 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: gamesData } = await axios.get(
-    'https://twitchtracker.com/games'
+    'https://twitchtracker.com/games',
+    {
+      headers: {
+        Accept: 'application/json',
+        'User-Agent': 'axios 0.21.1',
+      },
+    }
   );
   $ = cheerio.load(gamesData);
   const games = $('.ranked-item')
@@ -111,7 +129,13 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: musicData } = await axios.get(
-    'https://www.aria.com.au/charts/singles-chart'
+    'https://www.aria.com.au/charts/singles-chart',
+    {
+      headers: {
+        Accept: 'application/json',
+        'User-Agent': 'axios 0.21.1',
+      },
+    }
   );
   $ = cheerio.load(musicData);
   const songs = $('.c-chart-item')
@@ -124,7 +148,13 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: netflixData } = await axios.get(
-    'https://flixpatrol.com/top10/netflix/'
+    'https://flixpatrol.com/top10/netflix/',
+    {
+      headers: {
+        Accept: 'application/json',
+        'User-Agent': 'axios 0.21.1',
+      },
+    }
   );
   $ = cheerio.load(netflixData);
   const netMovies = $('.table-group').toArray().slice(0, 20);
