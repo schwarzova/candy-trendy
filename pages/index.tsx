@@ -109,23 +109,23 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
-  // const { data: gamesData } = await axios.get(
-  //   'https://twitchtracker.com/games',
-  //   {
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       Accept: 'application/json',
-  //     },
-  //   }
-  // );
-  // $ = cheerio.load(gamesData);
-  // const games = $('.ranked-item')
-  //   .toArray()
-  //   .map((x, i) => ({
-  //     img: $(x).find('.ri-image img').attr('src'),
-  //     title: $(x).find('.ri-name a').text(),
-  //     rank: i + 1,
-  //   }));
+  const { data: gamesData } = await axios.get(
+    'https://twitchtracker.com/games',
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+      },
+    }
+  );
+  $ = cheerio.load(gamesData);
+  const games = $('.ranked-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('.ri-image img').attr('src'),
+      title: $(x).find('.ri-name a').text(),
+      rank: i + 1,
+    }));
 
   // const { data: musicData } = await axios.get(
   //   'https://www.aria.com.au/charts/singles-chart',
@@ -169,7 +169,7 @@ export const getStaticProps: GetStaticProps = async () => {
       jokes,
       lastScraped,
       movies,
-      games: [],
+      games,
       songs: [],
       netflixMovies: [],
     },
