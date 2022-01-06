@@ -77,7 +77,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data: jokesData } = await axios.get(
-    'http://www.laughfactory.com/jokes/latest-jokes',
+    'https://www.laughfactory.com/jokes/latest-jokes',
     {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -90,24 +90,24 @@ export const getStaticProps: GetStaticProps = async () => {
     .toArray()
     .map((x) => $(x).text());
 
-  // const { data: moviesData } = await axios.get(
-  //   'http://editorial.rottentomatoes.com/guide/popular-movies/',
-  //   {
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'User-Agent': 'axios 0.21.1',
-  //     },
-  //   }
-  // );
-  // $ = cheerio.load(moviesData);
-  // const movies = $('.countdown-item')
-  //   .toArray()
-  //   .map((x, i) => ({
-  //     img: $(x).find('.article_poster').attr('src'),
-  //     title: $(x).find('.article_movie_title a').text(),
-  //     percentage: $(x).find('.tMeterScore').text(),
-  //     rank: i + 1,
-  //   }));
+  const { data: moviesData } = await axios.get(
+    'http://editorial.rottentomatoes.com/guide/popular-movies/',
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+      },
+    }
+  );
+  $ = cheerio.load(moviesData);
+  const movies = $('.countdown-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('.article_poster').attr('src'),
+      title: $(x).find('.article_movie_title a').text(),
+      percentage: $(x).find('.tMeterScore').text(),
+      rank: i + 1,
+    }));
 
   // const { data: gamesData } = await axios.get(
   //   'http://twitchtracker.com/games',
