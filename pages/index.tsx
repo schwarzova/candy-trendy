@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps = async () => {
     .map((x) => $(x).text());
 
   const { data: moviesData } = await axios.get(
-    'http://editorial.rottentomatoes.com/guide/popular-movies/',
+    'https://editorial.rottentomatoes.com/guide/popular-movies/',
     {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -109,23 +109,23 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
-  // const { data: gamesData } = await axios.get(
-  //   'http://twitchtracker.com/games',
-  //   {
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'User-Agent': 'axios 0.21.1',
-  //     },
-  //   }
-  // );
-  // $ = cheerio.load(gamesData);
-  // const games = $('.ranked-item')
-  //   .toArray()
-  //   .map((x, i) => ({
-  //     img: $(x).find('.ri-image img').attr('src'),
-  //     title: $(x).find('.ri-name a').text(),
-  //     rank: i + 1,
-  //   }));
+  const { data: gamesData } = await axios.get(
+    'https://twitchtracker.com/games',
+    {
+      headers: {
+        Accept: 'application/json',
+        'User-Agent': 'axios 0.21.1',
+      },
+    }
+  );
+  $ = cheerio.load(gamesData);
+  const games = $('.ranked-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('.ri-image img').attr('src'),
+      title: $(x).find('.ri-name a').text(),
+      rank: i + 1,
+    }));
 
   // const { data: musicData } = await axios.get(
   //   'http://www.aria.com.au/charts/singles-chart',
@@ -168,8 +168,8 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       jokes,
       lastScraped,
-      movies: [],
-      games: [],
+      movies,
+      games,
       songs: [],
       netflixMovies: [],
     },
