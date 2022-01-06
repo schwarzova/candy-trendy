@@ -107,10 +107,11 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   // const { data: gamesData } = await axios.get(
-  //   'http://twitchtracker.com/games',
+  //   'https://www.twitchmetrics.net/games/viewership',
   //   axiosOptions
   // );
   let gamesData;
+
   try {
     gamesData = await axios.get(
       'https://www.twitchmetrics.net/games/viewership'
@@ -121,11 +122,11 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   $ = cheerio.load(gamesData?.data);
-  const games = $('.ranked-item')
+  const games = $('.media')
     .toArray()
     .map((x, i) => ({
-      img: $(x).find('.ri-image img').attr('src'),
-      title: $(x).find('.ri-name a').text(),
+      img: $(x).find('.rounded').attr('src'),
+      title: $(x).find('h5').text(),
       rank: i + 1,
     }));
 
@@ -162,7 +163,7 @@ export const getStaticProps: GetStaticProps = async () => {
       jokes,
       lastScraped,
       movies,
-      games: [],
+      games,
       songs,
       netflixMovies,
     },
