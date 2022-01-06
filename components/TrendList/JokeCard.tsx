@@ -25,7 +25,7 @@ function JokeCard(props: Props) {
         background: '#725bf4',
         color: '#fff',
         textAlign: 'center',
-        fontFamily: '"Comic Sans MS", "Comic Sans", cursive;',
+        fontFamily: '"Comic Sans MS", "Comic Sans", cursive',
       }}
     >
       <Image

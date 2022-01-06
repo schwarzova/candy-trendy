@@ -9,16 +9,17 @@ import axios, { Method } from 'axios';
 import TrendList from '../components/TrendList/TrendList';
 import { Movie } from '../components/TrendList/MovieCard';
 import { useAppContext } from '../context/state';
+import { Game } from '../components/TrendList/GameCard';
 
 type Props = {
   lastScraped: string;
   jokes: string[];
   movies: Movie[];
+  games: Game[];
 };
 
 const Home = (props: Props) => {
   const { darkMode } = useAppContext();
-
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
 
   return (
@@ -44,6 +45,7 @@ const Home = (props: Props) => {
         <MainBox onCategoriesFilter={setFilteredCategories} />
         <TrendList
           filteredCategories={filteredCategories}
+          games={props.games}
           jokes={props.jokes}
           movies={props.movies}
         />
@@ -67,39 +69,44 @@ const Home = (props: Props) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { data } = await axios.get(
+export const getStaticProps: GetStaticProps = async () => {
+  const { data: jokesData } = await axios.get(
     'http://www.laughfactory.com/jokes/latest-jokes'
   );
-  let $ = cheerio.load(data);
+  let $ = cheerio.load(jokesData);
   const jokes = $('.joke-text p')
     .toArray()
     .map((x) => $(x).text());
 
-  const { data: tata } = await axios.get(
+  const { data: moviesData } = await axios.get(
     'https://editorial.rottentomatoes.com/guide/popular-movies/'
   );
-  $ = cheerio.load(tata);
-  const moviesImg = $('.article_poster')
-    .toArray()
-    .map((x) => $(x).attr('src'));
-  const moviesTitle = $('.article_movie_title a')
-    .toArray()
-    .map((x) => $(x).text());
-  const moviesPercentage = $('.tMeterScore')
-    .toArray()
-    .map((x) => $(x).text());
+  $ = cheerio.load(moviesData);
 
-  const movies = moviesImg.map((img, i) => ({
-    img,
-    title: moviesTitle[i],
-    percentage: moviesPercentage[i],
-    rank: i,
-  }));
+  const movies = $('.countdown-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('.article_poster').attr('src'),
+      title: $(x).find('.article_movie_title a').text(),
+      percentage: $(x).find('.tMeterScore').text(),
+      rank: i + 1,
+    }));
+
+  const { data: gamesData } = await axios.get(
+    'https://twitchtracker.com/games'
+  );
+  $ = cheerio.load(gamesData);
+  const games = $('.ranked-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('.ri-image img').attr('src'),
+      title: $(x).find('.ri-name a').text(),
+      rank: i + 1,
+    }));
 
   const lastScraped = new Date().toISOString();
   return {
-    props: { jokes, lastScraped, movies },
+    props: { jokes, lastScraped, movies, games },
     revalidate: 3600, // rerun after 1 hour
   };
 };

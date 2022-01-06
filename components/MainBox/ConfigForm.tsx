@@ -14,6 +14,7 @@ type Props = {
 function ConfigForm(props: Props) {
   const options = [
     { value: 'fun', label: 'Fun' },
+    { value: 'games', label: 'Games' },
     { value: 'jokes', label: 'Jokes' },
     { value: 'movies', label: 'Movies' },
   ];

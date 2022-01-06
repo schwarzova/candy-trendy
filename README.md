@@ -11,7 +11,20 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## How to add new cards
+
+1. Add web scraping fetch function to get data
+2. Create new `<Card />` component in `TrendList` folder
+   1. Create new type for data
+   2. Update render method and UI of new `Card`
+   3. Add categories + source link
+3. Render new `Cards` in `TrendList.tsx`
+4. Pass data to your `Cards` component
+5. Add categories for your new `Card` in `Select` in `ConfigForm.tsx`
+6. Update Readme -> Pages used for scraping
+
 ## Pages used for scraping
 
-- [Jokes](http://www.laughfactory.com/jokes/latest-jokes) - Latest jokes
+- [Games](https://twitchtracker.com/games) - 20 Twitch trending games
+- [Jokes](http://www.laughfactory.com/jokes/latest-jokes) - 11 Latest jokes
 - [Movies](https://editorial.rottentomatoes.com/guide/popular-movies/) - 30 latest popular movies
