@@ -21,7 +21,12 @@ function JokeCard(props: Props) {
       className={styles.card}
       target="_blank"
       rel="noreferrer"
-      style={{ background: '#725bf4', color: '#fff', textAlign: 'center' }}
+      style={{
+        background: '#725bf4',
+        color: '#fff',
+        textAlign: 'center',
+        fontFamily: '"Comic Sans MS", "Comic Sans", cursive;',
+      }}
     >
       <Image
         src="http://cdn.laughfactory.com/images/project-images/logo.png"

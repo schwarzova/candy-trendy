@@ -37,7 +37,7 @@ function MovieCard(props: Props) {
         width={60}
         height={20}
       />
-      <h2>Trendnig movies</h2>
+      <h2>Trending movies</h2>
       <div style={{ textAlign: 'left' }}>
         {props.movies.map((m, i) => (
           <div
