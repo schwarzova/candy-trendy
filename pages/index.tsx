@@ -113,8 +113,8 @@ export const getStaticProps: GetStaticProps = async () => {
     'https://twitchtracker.com/games',
     {
       headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
         Accept: 'application/json',
-        'User-Agent': 'axios 0.21.1',
       },
     }
   );
@@ -127,41 +127,41 @@ export const getStaticProps: GetStaticProps = async () => {
       rank: i + 1,
     }));
 
-  // const { data: musicData } = await axios.get(
-  //   'http://www.aria.com.au/charts/singles-chart',
-  //   {
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'User-Agent': 'axios 0.21.1',
-  //     },
-  //   }
-  // );
-  // $ = cheerio.load(musicData);
-  // const songs = $('.c-chart-item')
-  //   .toArray()
-  //   .map((x, i) => ({
-  //     img: $(x).find('img').attr('data-src'),
-  //     title: $(x).find('.c-chart-item__title').text(),
-  //     artist: $(x).find('.c-chart-item__artist').text(),
-  //     rank: i + 1,
-  //   }));
+  const { data: musicData } = await axios.get(
+    'http://www.aria.com.au/charts/singles-chart',
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+      },
+    }
+  );
+  $ = cheerio.load(musicData);
+  const songs = $('.c-chart-item')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('img').attr('data-src'),
+      title: $(x).find('.c-chart-item__title').text(),
+      artist: $(x).find('.c-chart-item__artist').text(),
+      rank: i + 1,
+    }));
 
-  // const { data: netflixData } = await axios.get(
-  //   'http://flixpatrol.com/top10/netflix/',
-  //   {
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       Accept: 'application/json',
-  //     },
-  //   }
-  // );
-  // $ = cheerio.load(netflixData);
-  // const netMovies = $('.table-group').toArray().slice(0, 20);
-  // const netflixMovies = netMovies.map((x, i) => ({
-  //   img: 'http://flixpatrol.com' + $(x).find('.table-poster-1 img').attr('src'),
-  //   title: $(x).find('a').text(),
-  //   rank: i + 1,
-  // }));
+  const { data: netflixData } = await axios.get(
+    'http://flixpatrol.com/top10/netflix/',
+    {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+      },
+    }
+  );
+  $ = cheerio.load(netflixData);
+  const netMovies = $('.table-group').toArray().slice(0, 20);
+  const netflixMovies = netMovies.map((x, i) => ({
+    img: 'http://flixpatrol.com' + $(x).find('.table-poster-1 img').attr('src'),
+    title: $(x).find('a').text(),
+    rank: i + 1,
+  }));
 
   const lastScraped = new Date().toISOString();
   return {
@@ -170,8 +170,8 @@ export const getStaticProps: GetStaticProps = async () => {
       lastScraped,
       movies,
       games,
-      songs: [],
-      netflixMovies: [],
+      songs,
+      netflixMovies,
     },
     revalidate: 3600, // rerun after 1 hour
   };
