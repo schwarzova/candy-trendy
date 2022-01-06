@@ -76,14 +76,16 @@ const Home = (props: Props) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
+  const axiosOptions = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: 'application/json',
+    },
+  };
+
   const { data: jokesData } = await axios.get(
     'https://www.laughfactory.com/jokes/latest-jokes',
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: 'application/json',
-      },
-    }
+    axiosOptions
   );
   let $ = cheerio.load(jokesData);
   const jokes = $('.joke-text p')
@@ -92,12 +94,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const { data: moviesData } = await axios.get(
     'https://editorial.rottentomatoes.com/guide/popular-movies/',
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: 'application/json',
-      },
-    }
+    axiosOptions
   );
   $ = cheerio.load(moviesData);
   const movies = $('.countdown-item')
@@ -110,13 +107,8 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   // const { data: gamesData } = await axios.get(
-  //   'https://twitchtracker.com/games',
-  //   {
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       Accept: 'application/json',
-  //     },
-  //   }
+  //   'http://twitchtracker.com/games',
+  //   axiosOptions
   // );
   // $ = cheerio.load(gamesData);
   // const games = $('.ranked-item')
@@ -129,12 +121,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const { data: musicData } = await axios.get(
     'https://www.aria.com.au/charts/singles-chart',
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: 'application/json',
-      },
-    }
+    axiosOptions
   );
   $ = cheerio.load(musicData);
   const songs = $('.c-chart-item')
@@ -148,12 +135,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const { data: netflixData } = await axios.get(
     'https://flixpatrol.com/top10/netflix/',
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: 'application/json',
-      },
-    }
+    axiosOptions
   );
   $ = cheerio.load(netflixData);
   const netMovies = $('.table-group').toArray().slice(0, 20);
