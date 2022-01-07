@@ -29,6 +29,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Jokes](http://www.laughfactory.com/jokes/latest-jokes) - 12 Latest jokes
 - [Memes](https://me.me/t/funny) - 74 memes
 - [Movies](https://editorial.rottentomatoes.com/guide/popular-movies/) - 30 latest popular movies
-- [Motivations](https://parade.com/973277/jessicasager/inspirational-quotes/) - 100 motivation quotes
+- [Motivations](https://blog.hubspot.com/sales/famous-quotes) - 100 motivation quotes
 - [Music](https://www.aria.com.au/charts/singles-chart) - 50 top songs
 - [Netflix Movies](https://flixpatrol.com/top10/netflix/) - 10 top movies + 10 top shows

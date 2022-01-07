@@ -38,6 +38,10 @@
   line-height: 1.5;
 }
 
+.bgImage {
+  border-radius: 10px;
+}
+
 .categories {
   background: rgb(218, 207, 207);
   height: 25px;

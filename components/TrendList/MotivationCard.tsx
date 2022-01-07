@@ -20,6 +20,8 @@ function MotivationCard(props: Props) {
     return null;
   }
 
+  const simpleQuote = props.quote.quote.split('"');
+
   return (
     <a
       className={styles.card}
@@ -31,11 +33,14 @@ function MotivationCard(props: Props) {
         fontSize: '16px',
       }}
     >
-      <Image
-        src="/images/motivation.jpg"
-        alt="Motivation background image"
-        layout="fill"
-      />
+      <div style={{ borderRadius: '10px' }}>
+        <Image
+          src="/images/motivation.jpg"
+          alt="Motivation background image"
+          layout="fill"
+          className={styles.bgImage}
+        />
+      </div>
       <Image src="/images/pepeSun.png" alt="Pepe logo" width={30} height={20} />
       <div
         style={{
@@ -51,7 +56,8 @@ function MotivationCard(props: Props) {
         }}
       >
         <h2>Motivation</h2>
-        <p style={{ fontSize: '16px' }}>{props.quote.quote}</p>
+        <p style={{ fontSize: '16px' }}>{`"${simpleQuote[1]}"`}</p>
+        <p style={{ color: 'blue' }}>{simpleQuote[2].slice(2)}</p>
       </div>
 
       {showCategories && <div className={styles.categories}>#motivation</div>}
