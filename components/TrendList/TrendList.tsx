@@ -13,7 +13,7 @@ type Props = {
   games: Game[]; // 20
   jokes: string[]; //12
   movies: Movie[]; //30
-  netflixMovies: NetflixMovie[]; // 0 - 9 movies // 10 - 19 shows;
+  netflixMovies: NetflixMovie[]; // 0 - 4, 10 - 14 shows // 5 - 9, 15 - 19 movies;
   songs: Song[]; //50
 };
 
@@ -38,133 +38,37 @@ function TrendList(props: Props) {
   games = showAll || showGames ? props.games : [];
   songs = showAll || showSongs ? props.songs : [];
 
-  return (
-    <div className={styles.grid}>
-      <MusicCard
-        songs={songs.length > 0 ? [songs[0], songs[1], songs[2]] : []}
-      />
-      <JokeCard joke={jokes[0] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[0], movies[1]] : []} />
-      <NetflixCard
-        isShow
-        movie={netflixMovies.length > 0 ? netflixMovies[10] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[0], games[1]] : []} />
+  const loopCount = 12;
+  let three = 0;
+  let two = 0;
 
-      <MusicCard
-        songs={songs.length > 0 ? [songs[3], songs[4], songs[5]] : []}
-      />
-      <JokeCard joke={jokes[1] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[2], movies[3]] : []} />
-      <NetflixCard
-        isShow
-        movie={netflixMovies.length > 0 ? netflixMovies[11] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[2], games[3]] : []} />
+  let cardLoops: React.ReactNode[] = [];
 
-      <MusicCard
-        songs={songs.length > 0 ? [songs[6], songs[7], songs[8]] : []}
-      />
-      <JokeCard joke={jokes[2] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[4], movies[5]] : []} />
-      <NetflixCard
-        isShow
-        movie={netflixMovies.length > 0 ? netflixMovies[12] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[4], games[5]] : []} />
+  for (let i = 0; i < loopCount; i++) {
+    const songsProp =
+      songs.length > 0
+        ? [songs[three], songs[three + 1], songs[three + 2]]
+        : [];
+    const moviesProp = movies.length > 0 ? [movies[two], movies[two + 1]] : [];
+    const movieProp = netflixMovies.length > 0 ? netflixMovies[i] : undefined;
+    const gamesProp = games.length > 0 ? [games[two], games[two + 1]] : [];
 
-      <MusicCard
-        songs={songs.length > 0 ? [songs[9], songs[10], songs[11]] : []}
-      />
-      <JokeCard joke={jokes[3] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[6], movies[7]] : []} />
-      <NetflixCard
-        movie={netflixMovies.length > 0 ? netflixMovies[0] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[6], games[7]] : []} />
+    const cardLoop = (
+      <React.Fragment key={i}>
+        <MusicCard songs={songsProp} />
+        <JokeCard joke={jokes[i] || ''} />
+        <MovieCard movies={moviesProp} />
+        <NetflixCard isShow={i < 5 || (i > 9 && i < 15)} movie={movieProp} />
+        <GameCard games={gamesProp} />
+      </React.Fragment>
+    );
+    cardLoops = [...cardLoops, cardLoop];
 
-      <MusicCard
-        songs={songs.length > 0 ? [songs[12], songs[13], songs[14]] : []}
-      />
-      <JokeCard joke={jokes[4] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[8], movies[9]] : []} />
-      <NetflixCard
-        movie={netflixMovies.length > 0 ? netflixMovies[1] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[8], games[9]] : []} />
+    three = three + 3;
+    two = two + 2;
+  }
 
-      <MusicCard
-        songs={songs.length > 0 ? [songs[15], songs[16], songs[17]] : []}
-      />
-      <JokeCard joke={jokes[5] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[10], movies[11]] : []} />
-      <NetflixCard
-        movie={netflixMovies.length > 0 ? netflixMovies[2] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[10], games[11]] : []} />
-
-      <MusicCard
-        songs={songs.length > 0 ? [songs[18], songs[19], songs[20]] : []}
-      />
-      <JokeCard joke={jokes[6] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[12], movies[13]] : []} />
-      <NetflixCard
-        isShow
-        movie={netflixMovies.length > 0 ? netflixMovies[13] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[12], games[13]] : []} />
-
-      <MusicCard
-        songs={songs.length > 0 ? [songs[21], songs[22], songs[23]] : []}
-      />
-      <JokeCard joke={jokes[7] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[14], movies[15]] : []} />
-      <NetflixCard
-        isShow
-        movie={netflixMovies.length > 0 ? netflixMovies[14] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[14], games[15]] : []} />
-
-      <MusicCard
-        songs={songs.length > 0 ? [songs[24], songs[25], songs[26]] : []}
-      />
-      <JokeCard joke={jokes[8] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[16], movies[17]] : []} />
-      <NetflixCard
-        isShow
-        movie={netflixMovies.length > 0 ? netflixMovies[15] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[16], games[17]] : []} />
-
-      <MusicCard
-        songs={songs.length > 0 ? [songs[27], songs[28], songs[29]] : []}
-      />
-      <JokeCard joke={jokes[9] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[18], movies[19]] : []} />
-      <NetflixCard
-        movie={netflixMovies.length > 0 ? netflixMovies[3] : undefined}
-      />
-      <GameCard games={games.length > 0 ? [games[18], games[19]] : []} />
-
-      <MusicCard
-        songs={songs.length > 0 ? [songs[30], songs[31], songs[32]] : []}
-      />
-      <JokeCard joke={jokes[10] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[20], movies[21]] : []} />
-      <NetflixCard
-        movie={netflixMovies.length > 0 ? netflixMovies[4] : undefined}
-      />
-
-      <MusicCard
-        songs={songs.length > 0 ? [songs[33], songs[34], songs[35]] : []}
-      />
-      <JokeCard joke={jokes[11] || ''} />
-      <MovieCard movies={movies.length > 0 ? [movies[22], movies[23]] : []} />
-      <NetflixCard
-        movie={netflixMovies.length > 0 ? netflixMovies[5] : undefined}
-      />
-    </div>
-  );
+  return <div className={styles.grid}>{cardLoops.map((loop) => loop)}</div>;
 }
 
 export default TrendList;

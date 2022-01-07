@@ -158,7 +158,12 @@ export const getStaticProps: GetStaticProps = async () => {
       movies,
       games,
       songs,
-      netflixMovies,
+      netflixMovies: [
+        ...netflixMovies.slice(10, 15),
+        ...netflixMovies.slice(0, 5),
+        ...netflixMovies.slice(15, 20),
+        ...netflixMovies.slice(5, 10),
+      ],
     },
     revalidate: 3600, // rerun after 1 hour
   };

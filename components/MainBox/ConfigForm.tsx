@@ -25,6 +25,7 @@ function ConfigForm(props: Props) {
       <div className={styles.select}>
         <Select
           options={options}
+          instanceId="mySelect"
           isMulti
           closeMenuOnSelect={false}
           classNamePrefix={

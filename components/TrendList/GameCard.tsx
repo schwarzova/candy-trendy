@@ -52,7 +52,7 @@ function GameCard(props: Props) {
               style={{ marginRight: '10px', borderRadius: '10px' }}
             />
             <div>
-              <p>
+              <div>
                 <div
                   style={{
                     padding: '3px',
@@ -68,20 +68,14 @@ function GameCard(props: Props) {
                   {m.rank}
                 </div>
                 {m.title}
-              </p>
+              </div>
             </div>
           </div>
         ))}
       </div>
       {showCategories && <div className={styles.categories}>#games #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
-        <a
-          href="https://www.twitchmetrics.net/games/viewership"
-          target="_blank"
-          rel="noreferrer"
-        >
-          https://www.twitchmetrics.net/games/viewership
-        </a>
+        <span>https://www.twitchmetrics.net/games/viewership</span>
       </div>
     </a>
   );

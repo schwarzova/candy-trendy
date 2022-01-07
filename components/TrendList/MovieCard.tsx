@@ -52,7 +52,7 @@ function MovieCard(props: Props) {
               style={{ marginRight: '10px' }}
             />
             <div>
-              <p>
+              <div>
                 <span
                   style={{
                     padding: '3px',
@@ -66,7 +66,7 @@ function MovieCard(props: Props) {
                   {m.rank}
                 </span>
                 {m.title}
-              </p>
+              </div>
               <p style={{ position: 'absolute', bottom: 0 }}>{m.percentage}</p>
             </div>
           </div>
@@ -74,13 +74,7 @@ function MovieCard(props: Props) {
       </div>
       {showCategories && <div className={styles.categories}>#movies #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
-        <a
-          href="https://www.rottentomatoes.com/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          https://www.rottentomatoes.com/
-        </a>
+        <span>https://www.rottentomatoes.com/</span>
       </div>
     </a>
   );

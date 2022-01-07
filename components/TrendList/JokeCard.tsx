@@ -38,9 +38,7 @@ function JokeCard(props: Props) {
       <p>{props.joke}</p>
       {showCategories && <div className={styles.categories}>#jokes #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
-        <a href="http://www.laughfactory.com/" target="_blank" rel="noreferrer">
-          http://www.laughfactory.com/
-        </a>
+        <span>http://www.laughfactory.com/</span>
       </div>
     </a>
   );

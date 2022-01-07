@@ -51,7 +51,7 @@ function NetflixCard(props: Props) {
             style={{ marginRight: '10px' }}
           />
           <div>
-            <p>
+            <div>
               {props.movie.title}
               <div
                 style={{
@@ -67,19 +67,13 @@ function NetflixCard(props: Props) {
                 {'#'}
                 {props.isShow ? props.movie.rank - 10 : props.movie.rank}
               </div>
-            </p>
+            </div>
           </div>
         </div>
       </div>
       {showCategories && <div className={styles.categories}>#movies #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
-        <a
-          href="https://flixpatrol.com/top10/netflix/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          https://flixpatrol.com/top10/netflix/
-        </a>
+        <span>https://flixpatrol.com/top10/netflix/</span>
       </div>
     </a>
   );

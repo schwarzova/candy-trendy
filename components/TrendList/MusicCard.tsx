@@ -61,7 +61,7 @@ function MusicCard(props: Props) {
               style={{ marginRight: '5px' }}
             />
             <div>
-              <p style={{ lineHeight: 'normal' }}>
+              <div style={{ lineHeight: 'normal' }}>
                 <div
                   style={{
                     padding: '3px',
@@ -79,20 +79,14 @@ function MusicCard(props: Props) {
                 </div>
                 <span style={{ fontSize: '14px' }}>{m.title}</span>
                 <div style={{ fontSize: '10px' }}>{m.artist}</div>
-              </p>
+              </div>
             </div>
           </div>
         ))}
       </div>
       {showCategories && <div className={styles.categories}>#music #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
-        <a
-          href="https://www.aria.com.au/charts/singles-chart"
-          target="_blank"
-          rel="noreferrer"
-        >
-          https://www.aria.com.au/charts/singles-chart
-        </a>
+        <span>https://www.aria.com.au/charts/singles-chart</span>
       </div>
     </a>
   );
