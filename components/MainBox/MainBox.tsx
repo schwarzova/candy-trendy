@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../context/state';
+import Buttons from './Buttons';
 import ConfigForm from './ConfigForm';
 
 import styles from './MainBox.module.css';
 import Title from './Title';
 
 type Props = {
+  lastScraped: string;
   onCategoriesFilter: (values: string[]) => void;
 };
 
@@ -35,6 +37,7 @@ function MainBox(props: Props) {
         isLeftLampOn={leftLampOn}
         isRightLampOn={rightLampOn}
       />
+      <Buttons lastScraped={props.lastScraped} />
       <ConfigForm
         darkMode={darkMode}
         onCategoriesFilter={props.onCategoriesFilter}

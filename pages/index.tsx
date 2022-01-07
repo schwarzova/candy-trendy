@@ -45,8 +45,10 @@ const Home = (props: Props) => {
       </Head>
 
       <main className={styles.main}>
-        <p>Last scraped: {props.lastScraped}</p>
-        <MainBox onCategoriesFilter={setFilteredCategories} />
+        <MainBox
+          lastScraped={props.lastScraped}
+          onCategoriesFilter={setFilteredCategories}
+        />
         <TrendList
           filteredCategories={filteredCategories}
           games={props.games}
@@ -150,11 +152,11 @@ export const getStaticProps: GetStaticProps = async () => {
     rank: i + 1,
   }));
 
-  const lastScraped = new Date().toISOString();
+  const lastScraped = new Date();
   return {
     props: {
       jokes,
-      lastScraped,
+      lastScraped: `${lastScraped.getHours()}:${lastScraped.getMinutes()}`,
       movies,
       games,
       songs,
