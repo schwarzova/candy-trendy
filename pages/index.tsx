@@ -179,8 +179,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: motivationData } = await axios.get(
-    'https://parade.com/973277/jessicasager/inspirational-quotes/',
-    axiosOptions
+    'https://parade.com/973277/jessicasager/inspirational-quotes/'
   );
   $ = cheerio.load(motivationData);
   const mot = $('p')
