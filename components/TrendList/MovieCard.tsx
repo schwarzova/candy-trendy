@@ -60,6 +60,7 @@ function MovieCard(props: Props) {
                     borderRadius: '5px',
                     backgroundColor: '#fff',
                     color: '#000',
+                    lineHeight: '2',
                   }}
                 >
                   {'#'}

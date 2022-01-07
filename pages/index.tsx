@@ -13,14 +13,16 @@ import { Game } from '../components/TrendList/GameCard';
 import { Song } from '../components/TrendList/MusicCard';
 import { NetflixMovie } from '../components/TrendList/NetflixCard';
 import { Meme } from '../components/TrendList/MemeCard';
+import { Quote } from '../components/TrendList/MotivationCard';
 
 type Props = {
-  lastScraped: string;
+  games: Game[];
   jokes: string[];
+  lastScraped: string;
   memes: Meme[];
+  motivations: Quote[];
   movies: Movie[];
   netflixMovies: NetflixMovie[];
-  games: Game[];
   songs: Song[];
 };
 
@@ -56,6 +58,7 @@ const Home = (props: Props) => {
           games={props.games}
           jokes={props.jokes}
           memes={props.memes}
+          motivations={props.motivations}
           movies={props.movies}
           netflixMovies={props.netflixMovies}
           songs={props.songs}
@@ -81,6 +84,18 @@ const Home = (props: Props) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
+  function getRandomMotivations(day: number) {
+    if (day === 0) return 0;
+    if (day === 1) return 20;
+    if (day === 2) return 40;
+    if (day === 3) return 60;
+    if (day === 4) return 0;
+    if (day === 5) return 40;
+    if (day === 6) return 20;
+
+    return 0;
+  }
+
   const axiosOptions = {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -163,11 +178,30 @@ export const getStaticProps: GetStaticProps = async () => {
       img: $(x).attr('data-src'),
     }));
 
-  const lastScraped = new Date();
+  const { data: motivationData } = await axios.get(
+    'https://parade.com/973277/jessicasager/inspirational-quotes/',
+    axiosOptions
+  );
+  $ = cheerio.load(motivationData);
+  const mot = $('p')
+    .toArray()
+    .map((x, i) => ({
+      quote: $(x).text(),
+      author: $(x).find('strong').text(),
+    }));
+  const motivations = mot.slice(7, 113);
+
+  const today = new Date();
+  const time = `${today.getHours()}:${
+    today.getMinutes() < 10 ? `0${today.getMinutes()}` : today.getMinutes()
+  }`;
+  const day = today.getDay();
+  const startMot = getRandomMotivations(day);
+
   return {
     props: {
       jokes,
-      lastScraped: `${lastScraped.getHours()}:${lastScraped.getMinutes()}`,
+      lastScraped: time,
       movies,
       games,
       songs,
@@ -178,6 +212,7 @@ export const getStaticProps: GetStaticProps = async () => {
         ...netflixMovies.slice(5, 10),
       ],
       memes,
+      motivations: [...motivations.slice(startMot, startMot + 40)],
     },
     revalidate: 3600, // rerun after 1 hour
   };

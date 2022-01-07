@@ -22,12 +22,19 @@ function JokeCard(props: Props) {
       target="_blank"
       rel="noreferrer"
       style={{
-        background: '#725bf4',
+        background: '#00008B',
         color: '#fff',
         textAlign: 'center',
         fontFamily: '"Comic Sans MS", "Comic Sans", cursive',
       }}
     >
+      <div style={{ opacity: '0.2' }}>
+        <Image
+          src="/images/jokes.jpeg"
+          alt="Emoji background image"
+          layout="fill"
+        />
+      </div>
       <Image
         src="http://cdn.laughfactory.com/images/project-images/logo.png"
         alt="Laugh factory logo"

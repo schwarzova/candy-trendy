@@ -8,41 +8,46 @@ import GameCard, { Game } from './GameCard';
 import MusicCard, { Song } from './MusicCard';
 import NetflixCard, { NetflixMovie } from './NetflixCard';
 import MemeCard, { Meme } from './MemeCard';
+import MotivationCard, { Quote } from './MotivationCard';
 
 type Props = {
   filteredCategories: string[];
   games: Game[]; // 20
   jokes: string[]; //12
   memes: Meme[]; //74
+  motivations: Quote[]; //100
   movies: Movie[]; //30
   netflixMovies: NetflixMovie[]; // 0 - 4, 10 - 14 shows // 5 - 9, 15 - 19 movies;
   songs: Song[]; //50
 };
 
 function TrendList(props: Props) {
-  let jokes: string[] = [];
-  let movies: Movie[] = [];
-  let netflixMovies: NetflixMovie[] = [];
   let games: Game[] = [];
-  let songs: Song[] = [];
+  let jokes: string[] = [];
   let memes: Meme[] = [];
+  let movies: Movie[] = [];
+  let motivations: Quote[] = [];
+  let netflixMovies: NetflixMovie[] = [];
+  let songs: Song[] = [];
 
   const showAll = props.filteredCategories.length === 0;
   const showFun = props.filteredCategories.includes('fun');
 
+  const showGames = showFun || props.filteredCategories.includes('games');
   const showJokes = showFun || props.filteredCategories.includes('jokes');
   const showMovies = showFun || props.filteredCategories.includes('movies');
-  const showGames = showFun || props.filteredCategories.includes('games');
   const showSongs = showFun || props.filteredCategories.includes('music');
+  const showMotivations = props.filteredCategories.includes('motivation');
 
-  jokes = showAll || showJokes ? props.jokes : [];
-  movies = showAll || showMovies ? props.movies : [];
-  netflixMovies = showAll || showMovies ? props.netflixMovies : [];
   games = showAll || showGames ? props.games : [];
-  songs = showAll || showSongs ? props.songs : [];
+  jokes = showAll || showJokes ? props.jokes : [];
   memes = showAll || showJokes ? props.memes : [];
+  movies = showAll || showMovies ? props.movies : [];
+  motivations = showAll || showMotivations ? props.motivations : [];
+  netflixMovies = showAll || showMovies ? props.netflixMovies : [];
+  songs = showAll || showSongs ? props.songs : [];
 
-  const loopCount = 40;
+  const loopCount = 50;
   let three = 0;
   let two = 0;
 
@@ -64,6 +69,7 @@ function TrendList(props: Props) {
         <MovieCard movies={moviesProp} />
         <MemeCard meme={memes[i] || undefined} />
         <NetflixCard isShow={i < 5 || (i > 9 && i < 15)} movie={movieProp} />
+        <MotivationCard quote={motivations[i] || undefined} />
         <GameCard games={gamesProp} />
       </React.Fragment>
     );
