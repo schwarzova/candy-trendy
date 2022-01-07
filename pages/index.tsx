@@ -14,6 +14,7 @@ import { Song } from '../components/TrendList/MusicCard';
 import { NetflixMovie } from '../components/TrendList/NetflixCard';
 import { Meme } from '../components/TrendList/MemeCard';
 import { Quote } from '../components/TrendList/MotivationCard';
+import { Podcast } from '../components/TrendList/PodcastCard';
 
 type Props = {
   games: Game[];
@@ -23,6 +24,7 @@ type Props = {
   motivations: Quote[];
   movies: Movie[];
   netflixMovies: NetflixMovie[];
+  podcasts: Podcast[];
   songs: Song[];
 };
 
@@ -61,6 +63,7 @@ const Home = (props: Props) => {
           motivations={props.motivations}
           movies={props.movies}
           netflixMovies={props.netflixMovies}
+          podcasts={props.podcasts}
           songs={props.songs}
         />
       </main>
@@ -198,6 +201,19 @@ export const getStaticProps: GetStaticProps = async () => {
   const day = today.getDay();
   const startMot = getRandomMotivations(day);
 
+  const { data: podcastsData } = await axios.get(
+    'https://chartable.com/charts/itunes/us-all-podcasts-podcasts'
+  );
+  $ = cheerio.load(podcastsData);
+  const podcasts = $('.striped--near-white')
+    .toArray()
+    .map((x, i) => ({
+      img: $(x).find('img').attr('data-src'),
+      artist: $(x).find('.silver').text(),
+      title: $(x).find('.blue').text(),
+      rank: i + 1,
+    }));
+
   return {
     props: {
       jokes,
@@ -213,6 +229,7 @@ export const getStaticProps: GetStaticProps = async () => {
       ],
       memes,
       motivations: [...motivations.slice(startMot, startMot + 40)],
+      podcasts,
     },
     revalidate: 3600, // rerun after 1 hour
   };

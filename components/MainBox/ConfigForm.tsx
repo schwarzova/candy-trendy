@@ -19,6 +19,7 @@ function ConfigForm(props: Props) {
     { value: 'movies', label: 'Movies' },
     { value: 'motivation', label: 'Motivation' },
     { value: 'music', label: 'Music' },
+    { value: 'podcasts', label: 'Podcasts' },
   ];
 
   return (

@@ -32,3 +32,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Motivations](https://blog.hubspot.com/sales/famous-quotes) - 100 motivation quotes
 - [Music](https://www.aria.com.au/charts/singles-chart) - 50 top songs
 - [Netflix Movies](https://flixpatrol.com/top10/netflix/) - 10 top movies + 10 top shows
+- [Podcasts](https://chartable.com/charts/itunes/us-all-podcasts-podcasts) - 100 top apple podcasts

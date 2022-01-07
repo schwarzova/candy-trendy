@@ -9,15 +9,17 @@ import MusicCard, { Song } from './MusicCard';
 import NetflixCard, { NetflixMovie } from './NetflixCard';
 import MemeCard, { Meme } from './MemeCard';
 import MotivationCard, { Quote } from './MotivationCard';
+import PodcastCard, { Podcast } from './PodcastCard';
 
 type Props = {
   filteredCategories: string[];
   games: Game[]; // 20
   jokes: string[]; //12
   memes: Meme[]; //74
-  motivations: Quote[]; //100
+  motivations: Quote[]; //40
   movies: Movie[]; //30
   netflixMovies: NetflixMovie[]; // 0 - 4, 10 - 14 shows // 5 - 9, 15 - 19 movies;
+  podcasts: Podcast[]; //100
   songs: Song[]; //50
 };
 
@@ -28,6 +30,7 @@ function TrendList(props: Props) {
   let movies: Movie[] = [];
   let motivations: Quote[] = [];
   let netflixMovies: NetflixMovie[] = [];
+  let podcasts: Podcast[] = [];
   let songs: Song[] = [];
 
   const showAll = props.filteredCategories.length === 0;
@@ -38,6 +41,7 @@ function TrendList(props: Props) {
   const showMovies = showFun || props.filteredCategories.includes('movies');
   const showSongs = showFun || props.filteredCategories.includes('music');
   const showMotivations = props.filteredCategories.includes('motivation');
+  const showPodcasts = props.filteredCategories.includes('podcasts');
 
   games = showAll || showGames ? props.games : [];
   jokes = showAll || showJokes ? props.jokes : [];
@@ -45,6 +49,7 @@ function TrendList(props: Props) {
   movies = showAll || showMovies ? props.movies : [];
   motivations = showAll || showMotivations ? props.motivations : [];
   netflixMovies = showAll || showMovies ? props.netflixMovies : [];
+  podcasts = showAll || showPodcasts ? props.podcasts : [];
   songs = showAll || showSongs ? props.songs : [];
 
   const loopCount = 50;
@@ -71,6 +76,7 @@ function TrendList(props: Props) {
         <NetflixCard isShow={i < 5 || (i > 9 && i < 15)} movie={movieProp} />
         <MotivationCard quote={motivations[i] || undefined} />
         <GameCard games={gamesProp} />
+        <PodcastCard podcast={podcasts[i]} />
       </React.Fragment>
     );
     cardLoops = [...cardLoops, cardLoop];
