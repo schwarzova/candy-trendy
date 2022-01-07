@@ -179,14 +179,15 @@ export const getStaticProps: GetStaticProps = async () => {
     }));
 
   const { data: motivationData } = await axios.get(
-    'https://parade.com/973277/jessicasager/inspirational-quotes/'
+    'https://blog.hubspot.com/sales/famous-quotes',
+    axiosOptions
   );
   $ = cheerio.load(motivationData);
   const mot = $('p')
     .toArray()
     .map((x, i) => ({
       quote: $(x).text(),
-      author: $(x).find('strong').text(),
+      author: '',
     }));
   const motivations = mot.slice(7, 113);
 

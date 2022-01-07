@@ -16,11 +16,7 @@ type Props = {
 function MotivationCard(props: Props) {
   const { darkMode, showCategories } = useAppContext();
 
-  if (
-    !props.quote ||
-    props.quote.quote[0] === '—' ||
-    props.quote.quote[0] === 'R'
-  ) {
+  if (!props.quote) {
     return null;
   }
 
