@@ -18,7 +18,7 @@ type Props = {
 function GameCard(props: Props) {
   const { darkMode, showCategories } = useAppContext();
 
-  if (props.games.length === 0) {
+  if (!props.games[0]) {
     return null;
   }
 

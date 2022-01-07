@@ -12,10 +12,12 @@ import { useAppContext } from '../context/state';
 import { Game } from '../components/TrendList/GameCard';
 import { Song } from '../components/TrendList/MusicCard';
 import { NetflixMovie } from '../components/TrendList/NetflixCard';
+import { Meme } from '../components/TrendList/MemeCard';
 
 type Props = {
   lastScraped: string;
   jokes: string[];
+  memes: Meme[];
   movies: Movie[];
   netflixMovies: NetflixMovie[];
   games: Game[];
@@ -53,6 +55,7 @@ const Home = (props: Props) => {
           filteredCategories={filteredCategories}
           games={props.games}
           jokes={props.jokes}
+          memes={props.memes}
           movies={props.movies}
           netflixMovies={props.netflixMovies}
           songs={props.songs}
@@ -152,6 +155,14 @@ export const getStaticProps: GetStaticProps = async () => {
     rank: i + 1,
   }));
 
+  const { data: memesData } = await axios.get('https://me.me/t/funny');
+  $ = cheerio.load(memesData);
+  const memes = $('.thumbnail')
+    .toArray()
+    .map((x) => ({
+      img: $(x).attr('data-src'),
+    }));
+
   const lastScraped = new Date();
   return {
     props: {
@@ -166,6 +177,7 @@ export const getStaticProps: GetStaticProps = async () => {
         ...netflixMovies.slice(15, 20),
         ...netflixMovies.slice(5, 10),
       ],
+      memes,
     },
     revalidate: 3600, // rerun after 1 hour
   };

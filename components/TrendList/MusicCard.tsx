@@ -18,7 +18,7 @@ type Props = {
 function MusicCard(props: Props) {
   const { darkMode, showCategories } = useAppContext();
 
-  if (props.songs.length === 0) {
+  if (!props.songs[0] || !props.songs[1] || !props.songs[2]) {
     return null;
   }
 

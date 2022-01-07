@@ -19,7 +19,7 @@ type Props = {
 function MovieCard(props: Props) {
   const { darkMode, showCategories } = useAppContext();
 
-  if (props.movies.length === 0) {
+  if (!props.movies[0] || !props.movies[1]) {
     return null;
   }
 

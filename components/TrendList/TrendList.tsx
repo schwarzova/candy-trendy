@@ -7,11 +7,13 @@ import MovieCard, { Movie } from './MovieCard';
 import GameCard, { Game } from './GameCard';
 import MusicCard, { Song } from './MusicCard';
 import NetflixCard, { NetflixMovie } from './NetflixCard';
+import MemeCard, { Meme } from './MemeCard';
 
 type Props = {
   filteredCategories: string[];
   games: Game[]; // 20
   jokes: string[]; //12
+  memes: Meme[]; //74
   movies: Movie[]; //30
   netflixMovies: NetflixMovie[]; // 0 - 4, 10 - 14 shows // 5 - 9, 15 - 19 movies;
   songs: Song[]; //50
@@ -23,6 +25,7 @@ function TrendList(props: Props) {
   let netflixMovies: NetflixMovie[] = [];
   let games: Game[] = [];
   let songs: Song[] = [];
+  let memes: Meme[] = [];
 
   const showAll = props.filteredCategories.length === 0;
   const showFun = props.filteredCategories.includes('fun');
@@ -37,8 +40,9 @@ function TrendList(props: Props) {
   netflixMovies = showAll || showMovies ? props.netflixMovies : [];
   games = showAll || showGames ? props.games : [];
   songs = showAll || showSongs ? props.songs : [];
+  memes = showAll || showJokes ? props.memes : [];
 
-  const loopCount = 12;
+  const loopCount = 40;
   let three = 0;
   let two = 0;
 
@@ -58,6 +62,7 @@ function TrendList(props: Props) {
         <MusicCard songs={songsProp} />
         <JokeCard joke={jokes[i] || ''} />
         <MovieCard movies={moviesProp} />
+        <MemeCard meme={memes[i] || undefined} />
         <NetflixCard isShow={i < 5 || (i > 9 && i < 15)} movie={movieProp} />
         <GameCard games={gamesProp} />
       </React.Fragment>
