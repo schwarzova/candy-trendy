@@ -52,7 +52,7 @@ function TrendList(props: Props) {
   podcasts = showAll || showPodcasts ? props.podcasts : [];
   songs = showAll || showSongs ? props.songs : [];
 
-  const loopCount = 50;
+  const loopCount = 40;
   let three = 0;
   let two = 0;
 

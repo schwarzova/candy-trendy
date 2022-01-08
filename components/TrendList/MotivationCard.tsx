@@ -22,6 +22,10 @@ function MotivationCard(props: Props) {
 
   const simpleQuote = props.quote.quote.split('"');
 
+  if (!simpleQuote || simpleQuote.length < 3) {
+    return null;
+  }
+
   return (
     <a
       className={styles.card}
@@ -57,7 +61,9 @@ function MotivationCard(props: Props) {
       >
         <h2>Motivation</h2>
         <p style={{ fontSize: '16px' }}>{`"${simpleQuote[1]}"`}</p>
-        <p style={{ color: 'blue' }}>{simpleQuote[2].slice(2)}</p>
+        {simpleQuote[2] && (
+          <p style={{ color: 'blue' }}>{simpleQuote[2].slice(2)}</p>
+        )}
       </div>
 
       {showCategories && <div className={styles.categories}>#motivation</div>}

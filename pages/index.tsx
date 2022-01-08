@@ -190,7 +190,6 @@ export const getStaticProps: GetStaticProps = async () => {
     .toArray()
     .map((x, i) => ({
       quote: $(x).text(),
-      author: '',
     }));
   const motivations = mot.slice(7, 113);
 
