@@ -173,7 +173,7 @@ export const getStaticProps: GetStaticProps = async () => {
     rank: i + 1,
   }));
 
-  const { data: memesData } = await axios.get('https://me.me/t/funny');
+  const { data: memesData } = await axios.get('https://me.me/?s=new');
   $ = cheerio.load(memesData);
   const memes = $('.thumbnail')
     .toArray()

@@ -22,7 +22,7 @@ function MemeCard(props: Props) {
 
   return (
     <a
-      href="https://me.me/t/funny"
+      href="https://me.me/?s=new"
       className={styles.card}
       target="_blank"
       rel="noreferrer"
@@ -36,7 +36,7 @@ function MemeCard(props: Props) {
       </div>
       {showCategories && <div className={styles.categories}>#jokes #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
-        <span>https://me.me/t/funny</span>
+        <span>https://me.me/?s=new</span>
       </div>
     </a>
   );
