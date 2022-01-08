@@ -173,13 +173,18 @@ export const getStaticProps: GetStaticProps = async () => {
     rank: i + 1,
   }));
 
-  const { data: memesData } = await axios.get('https://me.me/?s=new');
+  const { data: memesData } = await axios.get(
+    'https://www.boredpanda.com/relatable-memes-the-funny-introvert/?utm_source=google&utm_medium=organic&utm_campaign=organic'
+  );
+  console.log('memes', memesData);
   $ = cheerio.load(memesData);
-  const memes = $('.thumbnail')
+  const memes = $('.image-size-full')
     .toArray()
     .map((x) => ({
-      img: $(x).attr('data-src'),
+      img: $(x).attr('src'),
     }));
+
+  console.log('memes aasasas', memes);
 
   const { data: motivationData } = await axios.get(
     'https://blog.hubspot.com/sales/famous-quotes',
@@ -226,7 +231,7 @@ export const getStaticProps: GetStaticProps = async () => {
         ...netflixMovies.slice(15, 20),
         ...netflixMovies.slice(5, 10),
       ],
-      memes,
+      memes: [...memes.slice(5, 100)],
       motivations: [...motivations.slice(startMot, startMot + 40)],
       podcasts,
     },

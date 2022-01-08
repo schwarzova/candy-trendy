@@ -27,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - [Games](https://www.twitchmetrics.net/games/viewership) - 20 Twitch trending games
 - [Jokes](http://www.laughfactory.com/jokes/latest-jokes) - 12 Latest jokes
-- [Memes](https://me.me/?s=new) - 74 memes
+- [Memes](https://www.boredpanda.com/relatable-memes-the-funny-introvert/?utm_source=google&utm_medium=organic&utm_campaign=organic) - 74 memes
 - [Movies](https://editorial.rottentomatoes.com/guide/popular-movies/) - 30 latest popular movies
 - [Motivations](https://blog.hubspot.com/sales/famous-quotes) - 100 motivation quotes
 - [Music](https://www.aria.com.au/charts/singles-chart) - 50 top songs

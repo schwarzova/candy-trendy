@@ -16,7 +16,7 @@ type Props = {
 function MemeCard(props: Props) {
   const { darkMode, showCategories } = useAppContext();
 
-  if (!props.meme) {
+  if (!props.meme || !props.meme.img) {
     return null;
   }
 
@@ -32,7 +32,7 @@ function MemeCard(props: Props) {
         <Image src="/images/meme.png" alt="Meme logo" width={100} height={40} />
       </div>
       <div>
-        <img src={props.meme.img} width={210} height={290} alt="Meme image" />
+        <img src={props.meme.img} width={240} height={240} alt="Meme image" />
       </div>
       {showCategories && <div className={styles.categories}>#jokes #fun</div>}
       <div className={darkMode ? styles.sourceLinkDark : styles.sourceLink}>
